@@ -1,30 +1,17 @@
 <?php 
 
 // phpinfo();
+#posible despliegue en zeabur
 
 const API_URL = "https://whenisthenextmcufilm.com/api";
-#Inicializar una nueva sesión de cURL; ch = cURL handle
-$ch = curl_init(API_URL);
 
-//Indicar que queremos recibir el resultado de la petición y no mostrarla  en pantalla
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+function get_data($url){
+    $result  = file_get_contents($url);
+    $data = json_decode($result, true);
+    return $data;
+}
 
-/*
-Ejecutar la petición 
-y guardamos el resultado
-*/ 
-
-$result = curl_exec($ch);
-
-//Una alternativa sería utilizar file_get_contents 
-//$result = file_get_contents(API_URL); //Si solo quieres hacer un get de una api
-$data = json_decode($result,true);
-
-curl_close($ch);
-
-// var_dump($data);
+$data = get_data(API_URL);
 
 ?>
 
